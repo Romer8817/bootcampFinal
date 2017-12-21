@@ -1,0 +1,10 @@
+{
+    "require": {
+        "alesanchezr\/wpas-wordpress-dash": "dev-master"
+    },
+    "autoload": {
+        "psr-0": {
+            "php": ".\/wp-content\/themes\/envy-blog\/src"
+        }
+    }
+}
