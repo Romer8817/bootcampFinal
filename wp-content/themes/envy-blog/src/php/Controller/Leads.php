@@ -3,13 +3,17 @@ namespace php\Controller;
 
 use \php\Types\ProjectPostType;
 
-class Lead{
+class Leads{
     
     public function renderLead(){
         $current_lead = get_queried_object();
         
+        $args = [];
+        $argsQuery = array(
+            'post_type' => 'lead'
+        );
     
-        $args['car'] = get_post($current_lead->post_parent);
+        $args['leads'] = get_posts($argsQuery);
         
         return $args;
         

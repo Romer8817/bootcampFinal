@@ -17,39 +17,34 @@ $blog_layout = get_theme_mod( 'envy-blog_archive_page_layout', 'blog-layout-1' )
         <div id="primary" class="content-area">
             <main id="main" class="site-main" role="main">
                 <?php
-                if ( have_posts() ) :
-
-                    // Blog Posts
-                    $blog_classes = array( 'blog-layout' );
-                    $blog_classes[] = $blog_layout;
-
-                    if ( $blog_layout == 'blog-layout-1' ) {
-
-                        $columns = get_theme_mod( 'envy-blog_archive_page_layout1_display_columns', 'col-3' );
-                        $blog_classes[] = 'masonry';
-                        $blog_classes[] = 'has-'.$columns;
-
-                        echo '<div class="'.esc_attr( implode( ' ', $blog_classes ) ).'">';
-                        get_template_part( 'layouts/blog/blog-layout-1', get_post_format() );
-                        echo '</div><!-- .'.esc_attr( $blog_layout ).'-->';
-
-                    } elseif ( $blog_layout == 'blog-layout-6' ) {
-                        $blog_classes[] = 'has-left-align-image';
-
-                        echo '<div class="'.esc_attr( implode( ' ', $blog_classes ) ).'">';
-                        get_template_part( 'layouts/blog/blog-layout-6', get_post_format() );
-                        echo '</div><!-- .'.esc_attr( $blog_layout ).'-->';
-
-                    }
-
-                    // Pagination
-                    get_template_part( 'layouts/pagination/pagination', get_post_format() );
-
-                else :
-
-                    get_template_part( 'template-parts/content', 'none' );
-
-                endif; ?>
+                $argsQuery = array(
+                    'post_type' => 'lead'
+                );
+            
+                $leads = get_posts($argsQuery);
+                echo "<div class='blog-layout blog-layout-1 masonry has-col-3' style='position: relative; height: 2160.53px;'>";
+                foreach($leads as $lead){
+                    ?>
+                    <article class='col-3 child-element post type-post format-standard has-post-thumbnail hentry'>
+                        <div class='post-wrap'>
+                            <a href="<?php echo get_permalink($lead->ID);?>">
+                            <div class='content-holder'>
+                                <h2 class='entry-title'>
+                                    <?php echo $lead->post_title; ?>
+                                </h2>
+                                <div class='entry-content'>
+                                    <p><?php echo $lead->post_content; ?></p>
+                                </div>
+                            </div>
+                            </a>
+                        </div>
+                    </article>
+                    
+                    <?php
+                }
+                echo "</div>";
+                
+                     ?>
 
             </main><!-- #main -->
         </div><!-- #primary -->

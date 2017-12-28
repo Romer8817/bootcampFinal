@@ -356,7 +356,7 @@ function envy_blog_required_plugins() {
     $postTypeManager->newType(['type' => 'lead', 'class' => 'LeadPostType'])->register();
 
 
-    //CHANGES NAME FROM THIS LINE
+    //********************************************************************
     
     
     
